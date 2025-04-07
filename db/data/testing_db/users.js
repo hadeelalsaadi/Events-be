@@ -1,6 +1,6 @@
 
 module.exports = [{
-    id: 0,
+   user_id: 0,
     name: "Kimberly Bahringer",
     email: "Jena.Baumbach95@hotmail.com",
     password: "zizanimaf",
@@ -8,7 +8,7 @@ module.exports = [{
     registeredAt: "2025-04-07T07:50:47.508Z"
   },
   {
-    id: 1,
+   user_id: 1,
     name: "Clay Mohr",
     email: "Carter.Lemke65@hotmail.com",
     password: "macorigep",
@@ -16,7 +16,7 @@ module.exports = [{
     registeredAt: "2025-04-06T22:32:25.490Z"
   },
   {
-    id: 2,
+   user_id: 2,
     name: "Irene Bechtelar",
     email: "Titus86@hotmail.com",
     password: "rogifuzab",
@@ -24,7 +24,7 @@ module.exports = [{
     registeredAt: "2025-04-06T18:39:02.158Z"
   },
   {
-    id: 3,
+   user_id: 3,
     name: "Dr. Doug Borer",
     email: "Gregorio_Schaefer0@yahoo.com",
     password: "wupegomey",
@@ -32,7 +32,7 @@ module.exports = [{
     registeredAt: "2025-04-06T11:24:32.627Z"
   },
   {
-    id: 4,
+   user_id: 4,
     name: "Dr. Damon Olson",
     email: "Alisha.Krajcik11@gmail.com",
     password: "fekugayal",
