@@ -1961,7 +1961,7 @@ module.exports = [
       title: "Seamless system-worthy workforce",
       description: "Amplitudo vicissitudo ocer. Arma adeptio tendo acsi debilito adnuo. Excepturi casus caries occaecati annus rem vigilo delectatio.",
       url_img: "https://picsum.photos/seed/wwocDX/640/480",
-      genre_id: 2,
+      genre_id: 1,
       max_attendees: 237,
       date: "2026-03-30",
       timeZone: "Africa/Porto-Novo",

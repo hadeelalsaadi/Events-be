@@ -14,17 +14,17 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
       return db.query(`DROP TABLE IF EXISTS event_attendees;`);
     }).then(()=>{
         const genresTablePromise = db.query(`
-            CREATE TABLE genres (
+            CREATE TABLE genres(
               genre_id SERIAL PRIMARY KEY,
               name VARCHAR 
             );`);
       
             const usersTablePromise = db.query(`
-            CREATE TABLE users (
+            CREATE TABLE users(
                 user_id SERIAL PRIMARY KEY,
-                username   VARCHAR (25),
+                username   VARCHAR(50),
                 email VARCHAR (50) ,
-                password VARCHAR (9),
+                password VARCHAR (15),
                 avatar VARCHAR,
                 registeredAt TIMESTAMP DEFAULT NOW()
             );`);
@@ -44,7 +44,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                     date TIMESTAMP,
                     timeZone VARCHAR,
                     location VARCHAR ,
-                    organizer_id INT NOT NULL REFERENCES users(user_id)
+                    organizer_id INT  REFERENCES users(user_id)
                 );`);
           })
           .then(() => {
@@ -58,7 +58,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
           })
           .then(() => {
             const insertGenre = format(
-               "INSERT INTO genre (genre_id,name) VALUES %L;",
+               "INSERT INTO genres (genre_id,name) VALUES %L;",
                genresData.map(({ genre_id, name}) => [
                  genre_id,
                  name
@@ -82,7 +82,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
             })
             .then(() => {
                 const insertEvent = format(
-                  "INSERT INTO events (event_id,title,description,url_img,genre_id,max_attendees, date, timeZone, location,organizer_id) VALUES %L;",
+                  "INSERT INTO events (event_id,title,description,url_img, genre_id ,max_attendees, date, timeZone, location,organizer_id) VALUES %L;",
                   eventsData.map(
                     ({
                         id,

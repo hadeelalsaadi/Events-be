@@ -827,7 +827,7 @@ module.exports = [
   },
   {
     attendee_id: 118,
-    event_id: 300,
+    event_id: 30,
     user_id: 9,
     calendar_sync_status: "sync-failed",
     attendance_status: "confirmed"
@@ -1878,7 +1878,7 @@ module.exports = [
   {
     attendee_id: 268,
     event_id: 77,
-    user_id: 200,
+    user_id: 20,
     calendar_sync_status: "sync-failed",
     attendance_status: "pending"
   },
@@ -2235,7 +2235,7 @@ module.exports = [
   {
     attendee_id: 319,
     event_id: 256,
-    user_id: 200,
+    user_id: 20,
     calendar_sync_status: "not-synced",
     attendance_status: "cancelled"
   },
@@ -2780,7 +2780,7 @@ module.exports = [
   },
   {
     attendee_id: 397,
-    event_id: 300,
+    event_id: 30,
     user_id: 145,
     calendar_sync_status: "sync-failed",
     attendance_status: "no-show"
