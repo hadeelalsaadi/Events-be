@@ -5,13 +5,13 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
   return db
     .query(`DROP TABLE IF EXISTS events CASCADE;`)
     .then(() => {
-      return db.query(`DROP TABLE IF EXISTS genres;`);
+      return db.query(`DROP TABLE IF EXISTS genres CASCADE;`);
     })
     .then(() => {
       return db.query(`DROP TABLE IF EXISTS users CASCADE;`);
     })
     .then(() => {
-      return db.query(`DROP TABLE IF EXISTS event_attendees;`);
+      return db.query(`DROP TABLE IF EXISTS event_attendees CASCADE;`);
     }).then(()=>{
         const genresTablePromise = db.query(`
             CREATE TABLE genres(
@@ -41,7 +41,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                     url_img VARCHAR,
                     genre_id INT NOT NULL REFERENCES genres(genre_id),
                     max_attendees INT, 
-                    date TIMESTAMP,
+                    date DATE,
                     timeZone VARCHAR,
                     location VARCHAR ,
                     organizer_id INT  REFERENCES users(user_id)
@@ -85,7 +85,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                   "INSERT INTO events (event_id,title,description,url_img, genre_id ,max_attendees, date, timeZone, location,organizer_id) VALUES %L;",
                   eventsData.map(
                     ({
-                        id,
+                        event_id,
                         title,
                         description,
                         url_img,
@@ -96,7 +96,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                         location,
                         organizer_id
                     }) => [
-                        id,
+                        event_id,
                         title,
                         description,
                         url_img,
@@ -110,6 +110,14 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                   )
                 );
                 return db.query(insertEvent);
+              })
+              .then(() => {
+                return db.query(`
+                  SELECT setval(
+                    pg_get_serial_sequence('events', 'event_id'),
+                    (SELECT MAX(event_id) FROM events)
+                  );
+                `);
               })
               .then(() => {
                 const insertevent_attendees = format(

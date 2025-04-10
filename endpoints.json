@@ -1,0 +1,19 @@
+{
+    "GET /api": {
+      "description": "serves up a json representation of all the available endpoints of the api"
+    },
+    "GEt /api/events": {
+    "description":"response with  events  title , imag, location and date for the event_card in ront-end"},
+   "GET /api/events/:event_id":{
+    "description":" response with  an event's all details ",
+    "parameters": "exchange :event_id with anumber represents event_id"
+   },
+   "POSt /api/events":{
+    "description": "adds a new event to the list",
+    "parameters": " an object with properties of table columns considering NOT NULL values "
+    
+
+   }
+
+
+}

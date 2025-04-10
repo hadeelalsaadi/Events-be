@@ -1,6 +1,6 @@
 module.exports = [ 
    {
-      genre_genre_id: 1,
+      genre_id: 1,
       name: "Music"
     },
     {
