@@ -13,6 +13,19 @@
     "parameters": " an object with properties of table columns considering NOT NULL values "
     
 
+   },
+   "PATCH /api/events/:event_id":{
+    "description": "response with ok when user update an event details",
+    "parameters" : "send the new object with all new detailes"
+   },
+   "DELETE /api/events/:event_id":{
+    "description ": "delets event and responds with the correct status when given the delete query",
+    "parameters": "exchange :event_id with anumber represents event_id"
+   },
+
+   "POST /api/users": {
+    "description": "register a new user to the users database",
+    "parameters": "send an object with the new user's details"
    }
 
 

@@ -67,7 +67,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
             const insertUsers = format(
                 "INSERT INTO users (user_id,username,email,password,avatar,registeredAt) VALUES %L;",
                 usersData.map(({ user_id,name, email, password, avatar, registeredAt }) => [
-                    user_id,
+                  user_id,
                   name,
                   email,
                   password,
@@ -79,6 +79,13 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                  const insertgenreQuery = db.query(insertGenre);
                  const insertUsersQuery = db.query(insertUsers);
                  return Promise.all([insertgenreQuery, insertUsersQuery]);
+            }) .then(() => {
+              return db.query(`
+                SELECT setval(
+                  pg_get_serial_sequence('users', 'user_id'),
+                  (SELECT MAX(user_id) FROM users)
+                );
+              `);
             })
             .then(() => {
                 const insertEvent = format(

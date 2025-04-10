@@ -41,7 +41,7 @@ const addEvent = ({title, description, url_img, genre_id, max_attendees, date, l
       .then(({ rows }) => {
         return rows[0];
       }).catch((err)=>{
-        console.log(err)
+         next(err)
       })
   };
 

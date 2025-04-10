@@ -142,3 +142,24 @@ describe("DELETE  /api/events/:event_id", () => {
     });
 })
 
+describe("POST /api/users",()=>{
+    test("POST- 201 response with the new registered user",()=>{
+       const newUser= {
+        username: "Barrushi abdulhameed",
+        email: "Barruso@hotmail.com",
+        password: "123456789",
+        avatar: "https://avatars.githubusercontent.com/u/12133322",
+        registeredAt: "2025-03-06T18:39:02.158Z"
+    }
+        return request(app)
+        .post("/api/users")
+        .send(newUser)
+        .expect(201)
+        .then(({body})=>{
+            console.log(body)
+        })
+
+    })
+
+})
+
