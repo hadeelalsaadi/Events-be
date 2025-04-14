@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const endpoints= require("./endpoints.json");
 const { getAllEvents, getEventById, postAnEvent, updateAnEvent, removeAnEvent } = require("./controllers/events.controllers");
-const { registerUser } = require("./controllers/users.controllers");
+const { registerUser, getUserByUsername } = require("./controllers/users.controllers");
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +17,9 @@ app.post("/api/events",postAnEvent)
 app.patch("/api/events/:event_id", updateAnEvent)
 app.delete("/api/events/:event_id", removeAnEvent)
 app.post("/api/users", registerUser )
+app.get("/api/users/:username", getUserByUsername)
+
+
 
 
 

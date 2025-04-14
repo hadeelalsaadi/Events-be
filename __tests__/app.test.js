@@ -24,7 +24,7 @@ describe("/api",()=>{
     })
 })
 describe("/api/events",()=>{
-    test("Get-200 response with  events  title , imag, location and date ",()=>{
+    test("Get-200 response with  events list  ",()=>{
         return request(app)
         .get("/api/events")
         .expect(200)
@@ -32,10 +32,17 @@ describe("/api/events",()=>{
             
             expect(body.events.length).toBe(13)
             body.events.forEach((event)=>{
+               
                 expect(typeof event.title).toBe("string")
+                expect(typeof event.description).toBe("string")
                 expect(typeof event.url_img ).toBe("string")
+                expect(typeof event.genre_id).toBe("number")
+                expect(typeof event.max_attendees).toBe("number")
                 expect(typeof event.location).toBe("string")
-                expect(typeof event.date).toBe("string")
+                expect(typeof event.timezone).toBe("string")
+                expect(typeof event.organizer_id).toBe("number")
+                expect( typeof event.start_time).toBe("string")
+                
                 
             })
           
@@ -51,13 +58,16 @@ describe("/api/events/:event_id",()=>{
         .get("/api/events/3")
         .expect(200)
         .then(({body})=>{
-                expect(body.event.title).toBe("Total actuating emulation")
-                expect(body.event.description).toBe("Fugit quidem abscido deorsum voveo corrupti alo deinde vix congregatio. Thermae bellicus decipio sumo cunctatio aufero volaticus soleo uredo. Cenaculum desipio aegre.")
-                expect(body.event.url_img ).toBe("https://picsum.photos/seed/nd6eiD/640/480")
-            
-                expect(body.event.date).toBe("2026-01-27T00:00:00.000Z")
-                
-                expect(body.event.organizer_id).toBe(3)
+                expect(body.event.title).toBe("Exclusive secondary success")
+                expect(body.event.description).toBe("Cogito vomer fugit. Abscido deorsum voveo corrupti alo deinde vix congregatio. Thermae bellicus decipio sumo cunctatio aufero volaticus soleo uredo.")
+                expect(body.event.url_img ).toBe("https://loremflickr.com/640/480?lock=2404073856072746")
+                expect(body.event.genre_id).toBe(1)
+                expect(body.event.max_attendees).toBe(261)
+                expect(typeof body.event.location).toBe("string")
+                expect(typeof body.event.start_time).toBe("string")
+                expect(typeof body.event.end_time).toBe("string")
+                expect(body.event.timezone).toBe("Atlantic/Reykjavik")
+                expect(body.event.organizer_id).toBe(1)
             
             })
           
@@ -70,13 +80,25 @@ describe("/api/events/:event_id",()=>{
 describe("POST /api/events", () => {
     test("POST: 201 - adds a new event to the list", () => {
          const newEvent = { 
-            title: "Innovative Sustainable Technology Summit",
-            description:"Join industry leaders and innovators for a day of exploration and collaboration on emerging sustainable technologies. Network with experts, attend hands-on workshops", 
-            url_img: "https://picsum.photos/seed/techEco22/640/480", genre_id: 3,
-            max_attendees: 200,
-            date:"2025-09-15T23:00:00.000Z",
-            location:'{"name":"Greenfield Convention Center","address":"2145 Innovation Boulevard","city":"Austin","state":"Texas","country":"United States","zipCode":"78701"}',
+            title: "Neon Dreams Symposium",
+            description: "Verto stella cursus. Absconditus vacuus articulus temeritas callide varietas tricesimus tardus. Arbitro versus defleo corrumpo celebrer coerceo argentum triumphus.",
+            url_img: "https://loremflickr.com/640/480?lock=7482940235823759",
+            genre_id: 3,
+            max_attendees: 420,
+            location: {
+              name: "Klein - Jakubowski Hall",
+              address: "1892 Pine Loop",
+              city: "Maple Hollow",
+              state: "Montana",
+              country: "Saint Kitts and Nevis",
+              zipCode: "59301"
+            },
+            start: "2025-05-02T18:00:00.000Z",
+            end: "2025-05-03T02:30:00.000Z",
+            timeZone: "Europe/Oslo",
             organizer_id: 2
+          
+            
         }
       
       return request(app)
@@ -87,6 +109,14 @@ describe("POST /api/events", () => {
           expect(body.event).toHaveProperty('title');
           expect(body.event).toHaveProperty('description');
           expect(body.event).toHaveProperty('max_attendees');
+          expect(body.event).toHaveProperty('genre_id');
+          expect(body.event).toHaveProperty('location');
+          expect(body.event).toHaveProperty('start_time');
+          expect(body.event).toHaveProperty('end_time');
+          expect(body.event).toHaveProperty('max_attendees');
+          expect(body.event).toHaveProperty('timezone');
+          expect(body.event).toHaveProperty('organizer_id');
+
          expect(typeof body.event.event_id).toBe("number");
         });
     });
@@ -94,40 +124,51 @@ describe("POST /api/events", () => {
 
 describe("PATCH  /api/events/:event_id ",()=>{
     test("PATCH: 200 response with ok when user update an event details ",()=>{
+        const updatedEvent= {
+            title: "Synthwave Soirée",
+            description: "Delibero sursum vesper paulatim amiculum. Vulgus deporto tracto crux solutio blandior defleo. Capitulus subito suffragium utor comprehendo cenaculum stella.",
+            url_img: "https://loremflickr.com/640/480?lock=6834290512837642",
+            genre_id: 4,
+            max_attendees: 180,
+            location: {
+              name: "Rowe - Reichel Arena",
+              address: "5128 Lavender Ridge",
+              city: "Crystal Bay",
+              state: "Nevada",
+              country: "Turks and Caicos Islands",
+              zipCode: "88901"
+            },
+            start: "2025-06-10T19:30:00.000Z",
+            end: "2025-06-11T01:00:00.000Z",
+            timeZone: "Asia/Tokyo",
+            organizer_id: 3
+          }
         return request(app)
         .patch("/api/events/2")
-        .send({
-            title: "Triple-buffered client-driven architecture",
-            description: "Cubitum curriculum libero annus. Tondeo delibero titulus absens. Vicissitudo non basium supellex cras sordeo adamo.",
-            url_img: "https://picsum.photos/seed/Kt7x4/640/480",
-            genre_id: 1,
-            max_attendees: 334,
-            date: "2026-02-08",
-            timeZone: "Pacific/Wake",
-            location: {
-                
-                    name: "Kuhn, Welch and Sons 2021",
-                    address: "8830 Phoenix Meadow",
-                    city: "Everettview",
-                    state: "Oregon",
-                    country: "Iceland",
-                    zipCode: "97401"
-                  
-            },
-            organizer_id: 4
-        })
+        .send(updatedEvent)
         .expect(200)
-        .then(({ body }) => {
+        .then(({ body }) => {  
+            console.log(body.event)
+            expect(body.event.title).toBe('Synthwave Soirée')
+            expect(body.event.description).toBe('Delibero sursum vesper paulatim amiculum. Vulgus deporto tracto crux solutio blandior defleo. Capitulus subito suffragium utor comprehendo cenaculum stella.')
+            expect(body.event.url_img).toBe('https://loremflickr.com/640/480?lock=6834290512837642')
+            expect(body.event.genre_id).toBe(4)
+            expect(body.event.max_attendees).toBe(180)
+            expect(body.event.location).toEqual({
+                name: 'Rowe - Reichel Arena',
+                address: '5128 Lavender Ridge',
+                city: 'Crystal Bay',
+                state: 'Nevada',
+                country: 'Turks and Caicos Islands',
+                zipCode: '88901'
+              });
+            expect(body.event.start_time).toBe('2025-06-10T18:30:00.000Z')
+            expect(body.event.end_time).toBe('2025-06-11T00:00:00.000Z')
+            expect(body.event.timezone).toBe('Asia/Tokyo')
+            expect(body.event.organizer_id).toBe(3)
             
-          expect(body.event.location).toEqual({
-            name: "Kuhn, Welch and Sons 2021",
-            address: "8830 Phoenix Meadow",
-            city: "Everettview",
-            state: "Oregon",
-            country: "Iceland",
-            zipCode: "97401"
-          });
-          expect(body.event.date).toBe("2026-02-08T00:00:00.000Z");
+
+        
         })
          
 
@@ -148,6 +189,7 @@ describe("POST /api/users",()=>{
         username: "Barrushi abdulhameed",
         email: "Barruso@hotmail.com",
         password: "123456789",
+        role:"member",
         avatar: "https://avatars.githubusercontent.com/u/12133322",
         registeredAt: "2025-03-06T18:39:02.158Z"
     }
@@ -156,10 +198,35 @@ describe("POST /api/users",()=>{
         .send(newUser)
         .expect(201)
         .then(({body})=>{
-            console.log(body)
+            expect(body.user).toHaveProperty("username")
+            expect(body.user).toHaveProperty("email")
+            expect(body.user).toHaveProperty("password")
+            expect(body.user).toHaveProperty("user_role")
+            expect(body.user).toHaveProperty("avatar")
+            expect(body.user).toHaveProperty("registeredat")
+            expect(typeof body.user.user_id).toBe("number")
+
+
+
         })
 
     })
+})
+describe("Get /api/users/:username",()=>{
+    test("GET - response with user's detials when requested by username",()=>{
+        return request(app)
+        .get("/api/users/michaelbrown")
+       .expect(200)
+       .then(({body})=>{
+        expect(body.user.user_id).toBe(4)
+        expect(body.user.name).toBe("Michael Brown")
+        expect(body.user.email).toBe("michael.b@example.com")
+        expect(body.user.password).toBe("mike_pass_202")
+        expect(body.user.user_role).toBe("member")
+        expect(body.user.avatar).toBe("https://example.com/avatars/michaelb.png")
+        expect(body.user).toHaveProperty("registeredat")
+       })
 
+    })
 })
 

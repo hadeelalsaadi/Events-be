@@ -22,10 +22,13 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
             const usersTablePromise = db.query(`
             CREATE TABLE users(
                 user_id SERIAL PRIMARY KEY,
-                username   VARCHAR(50),
+                username VARCHAR,
+                name VARCHAR, 
                 email VARCHAR (50) ,
-                password VARCHAR (15),
+                password VARCHAR,
+                user_role VARCHAR,
                 avatar VARCHAR,
+                
                 registeredAt TIMESTAMP DEFAULT NOW()
             );`);
       
@@ -34,16 +37,16 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
           .then(() => {
             return db.query(`
                 CREATE TABLE events (
-                    
                     event_id SERIAL PRIMARY KEY,
                     title VARCHAR NOT NULL,
                     description VARCHAR , 
                     url_img VARCHAR,
                     genre_id INT NOT NULL REFERENCES genres(genre_id),
                     max_attendees INT, 
-                    date DATE,
-                    timeZone VARCHAR,
                     location VARCHAR ,
+                    start_time TIMESTAMP WITHOUT TIME ZONE,
+                    end_time TIMESTAMP WITHOUT TIME ZONE,
+                    timezone VARCHAR,
                     organizer_id INT  REFERENCES users(user_id)
                 );`);
           })
@@ -65,12 +68,14 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                ])
             );
             const insertUsers = format(
-                "INSERT INTO users (user_id,username,email,password,avatar,registeredAt) VALUES %L;",
-                usersData.map(({ user_id,name, email, password, avatar, registeredAt }) => [
+                "INSERT INTO users (user_id,username,name, email,password,user_role, avatar,registeredAt) VALUES %L;",
+                usersData.map(({ user_id,username, name, email, password, user_role,avatar, registeredAt }) => [
                   user_id,
+                  username, 
                   name,
                   email,
                   password,
+                  user_role,
                   avatar,
                   registeredAt
                 ])
@@ -89,19 +94,9 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
             })
             .then(() => {
                 const insertEvent = format(
-                  "INSERT INTO events (event_id,title,description,url_img, genre_id ,max_attendees, date, timeZone, location,organizer_id) VALUES %L;",
+                  "INSERT INTO events (event_id,title,description,url_img, genre_id ,max_attendees, location,start_time,end_time, timeZone, organizer_id) VALUES %L;",
                   eventsData.map(
-                    ({
-                        event_id,
-                        title,
-                        description,
-                        url_img,
-                        genre_id,
-                        max_attendees,
-                        date,
-                        timeZone,
-                        location,
-                        organizer_id
+                    ({ event_id, title, description,url_img, genre_id,max_attendees, location, start, end, timeZone, organizer_id
                     }) => [
                         event_id,
                         title,
@@ -109,9 +104,10 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                         url_img,
                         genre_id,
                         max_attendees,
-                        date,
-                        timeZone,
                         location,
+                        start, 
+                        end, 
+                        timeZone,
                         organizer_id
                     ]
                   )

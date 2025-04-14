@@ -1,42 +1,52 @@
 
-module.exports = [{
-   user_id: 0,
-    name: "Kimberly Bahringer",
-    email: "Jena.Baumbach95@hotmail.com",
-    password: "zizanimaf",
-    avatar: "https://avatars.githubusercontent.com/u/61769062",
-    registeredAt: "2025-04-07T07:50:47.508Z"
-  },
-  {
-   user_id: 1,
-    name: "Clay Mohr",
-    email: "Carter.Lemke65@hotmail.com",
-    password: "macorigep",
-    avatar: "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/8.jpg",
-    registeredAt: "2025-04-06T22:32:25.490Z"
-  },
-  {
-   user_id: 2,
-    name: "Irene Bechtelar",
-    email: "Titus86@hotmail.com",
-    password: "rogifuzab",
-    avatar: "https://avatars.githubusercontent.com/u/12133322",
-    registeredAt: "2025-04-06T18:39:02.158Z"
-  },
-  {
-   user_id: 3,
-    name: "Dr. Doug Borer",
-    email: "Gregorio_Schaefer0@yahoo.com",
-    password: "wupegomey",
-    avatar: "https://avatars.githubusercontent.com/u/99615930",
-    registeredAt: "2025-04-06T11:24:32.627Z"
-  },
-  {
-   user_id: 4,
-    name: "Dr. Damon Olson",
-    email: "Alisha.Krajcik11@gmail.com",
-    password: "fekugayal",
-    avatar: "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/99.jpg",
-    registeredAt: "2025-04-06T23:20:05.272Z"
-  },
+module.exports = [  {
+  user_id: 0,
+  username: "johndoe",
+  name: "John Doe",
+  email: "john.doe@example.com",
+  password: "secure_password_123",
+  user_role: "admin",
+  avatar: "https://example.com/avatars/johndoe.png",
+  registeredAt: "2024-01-15T09:30:00Z"
+},
+{
+  user_id: 1,
+  username: "janesmit",
+  name: "Jane Smith",
+  email: "jane.smith@example.com",
+  password: "jane_secure_456",
+  user_role: "admin",
+  avatar: "https://example.com/avatars/janesmith.png",
+  registeredAt: "2024-01-18T14:45:00Z"
+},
+{
+  user_id: 2,
+  username: "robertjohnson",
+  name: "Robert Johnson",
+  email: "robert.j@example.com",
+  password: "rob_pass_789",
+  user_role: "admin",
+  avatar: "https://example.com/avatars/robertj.png",
+  registeredAt: "2024-02-03T11:20:00Z"
+},
+{
+  user_id: 3,
+  username: "sarahwilliams",
+  name: "Sarah Williams",
+  email: "sarah.w@example.com",
+  password: "sarah_secure_101",
+  user_role: "member",
+  avatar: "https://example.com/avatars/sarahw.png",
+  registeredAt: "2024-02-10T16:05:00Z"
+},
+{
+  user_id: 4,
+  username: "michaelbrown",
+  name: "Michael Brown",
+  email: "michael.b@example.com",
+  password: "mike_pass_202",
+  user_role: "member",
+  avatar: "https://example.com/avatars/michaelb.png",
+  registeredAt: "2024-02-22T08:15:00Z"
+}
 ]
