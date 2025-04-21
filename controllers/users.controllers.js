@@ -14,9 +14,6 @@ const registerUser= (request, response,next)=>{
 }
 const getUserByUsername =(request, response,next)=>{
     const userName= request.params.username
-    console.log(userName)
-
-    
     fetchUserByUsername(userName).then((user)=>{
         return response.status(200).send({user: user})
     }).catch((err)=>{

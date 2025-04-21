@@ -148,7 +148,6 @@ describe("PATCH  /api/events/:event_id ",()=>{
         .send(updatedEvent)
         .expect(200)
         .then(({ body }) => {  
-            console.log(body.event)
             expect(body.event.title).toBe('Synthwave Soirée')
             expect(body.event.description).toBe('Delibero sursum vesper paulatim amiculum. Vulgus deporto tracto crux solutio blandior defleo. Capitulus subito suffragium utor comprehendo cenaculum stella.')
             expect(body.event.url_img).toBe('https://loremflickr.com/640/480?lock=6834290512837642')
@@ -228,5 +227,21 @@ describe("Get /api/users/:username",()=>{
        })
 
     })
+})
+describe("POST /api/event_attendees",()=>{
+    test("Post- 201 response when user sign up for an event ",()=>{
+        return request(app)
+        .post("/api/event_attendees")
+        .send({event_id: 2, user_id: 4})
+        .expect(201)
+        .then(({body})=>{
+            expect(body.attendee.event_id).toBe(2)
+            expect(body.attendee.user_id).toBe(4)
+            expect(typeof body.attendee.attendee_id).toBe('number')
+
+        })
+    })
+   
+
 })
 

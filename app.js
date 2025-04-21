@@ -6,6 +6,7 @@ const endpoints= require("./endpoints.json");
 const { getAllEvents, getEventById, postAnEvent, updateAnEvent, removeAnEvent } = require("./controllers/events.controllers");
 const { registerUser, getUserByUsername } = require("./controllers/users.controllers");
 const { fetchEventById } = require("./models/events.models");
+const { userSignUp } = require("./controllers/event_attendees.contrroller");
 
 
 //*****************************************************Google Calender integration *******************************************
@@ -117,6 +118,7 @@ app.patch("/api/events/:event_id", updateAnEvent)
 app.delete("/api/events/:event_id", removeAnEvent)
 app.post("/api/users", registerUser )
 app.get("/api/users/:username", getUserByUsername)
+app.post("/api/event_attendees", userSignUp )
 
 
 app.use((err,request, response,next)=>{

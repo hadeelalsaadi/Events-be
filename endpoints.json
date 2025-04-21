@@ -26,6 +26,10 @@
    "POST /api/users": {
     "description": "register a new user to the users database",
     "parameters": "send an object with the new user's details"
+   },
+   "POST /api/event_attendees": {
+    "description": " sign up a user for an event",
+    "parameters": " send user_id and event_id as an object "
    }
 
 

@@ -40,7 +40,6 @@ const postAnEvent= (request,response,next)=>{
 
 const updateAnEvent = (request, response, next)=>{
   const newDetails = request.body
-  console.log(newDetails)
   const { event_id } = request.params;
   patchAnEvent(event_id, newDetails).then((event)=>{
 

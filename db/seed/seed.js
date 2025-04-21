@@ -54,10 +54,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
             return db.query(` CREATE TABLE event_attendees (
                    attendee_id SERIAL PRIMARY KEY,
                    event_id INT NOT NULL REFERENCES events(event_id),
-                   user_id INT NOT NULL REFERENCES users(user_id),
-                  calendar_sync_status VARCHAR ,
-                   attendance_status VARCHAR
-                  );`);
+                   user_id INT NOT NULL REFERENCES users(user_id));`);
           })
           .then(() => {
             const insertGenre = format(
@@ -124,12 +121,18 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
               })
               .then(() => {
                 const insertevent_attendees = format(
-                  "INSERT INTO event_attendees (  attendee_id, event_id, user_id,calendar_sync_status, attendance_status) VALUES %L;",
-                  eventattendeesData.map(({attendee_id, event_id, user_id, calendar_sync_status, attendance_status }) => [
-                    attendee_id, event_id, user_id, calendar_sync_status, attendance_status 
-                  ])
+                  "INSERT INTO event_attendees (  attendee_id, event_id, user_id) VALUES %L;",
+                  eventattendeesData.map(({attendee_id, event_id, user_id}) => [
+                    attendee_id, event_id, user_id ])
                 );
                 return db.query(insertevent_attendees);
+              }).then(() => {
+                return db.query(`
+                  SELECT setval(
+                    pg_get_serial_sequence('event_attendees', 'attendee_id'),
+                    (SELECT MAX(attendee_id) FROM event_attendees)
+                  );
+                `);
               });
 };
           
