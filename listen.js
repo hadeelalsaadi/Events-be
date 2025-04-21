@@ -1,4 +1,4 @@
-//const dotenv = require("dotenv");
+const dotenv = require("dotenv");
 //dotenv.config({ path: './.env.googleCalender' });
 const app = require("./app.js");
 //const port = process.env.PORT;
