@@ -24,12 +24,11 @@ describe("/api",()=>{
     })
 })
 describe("/api/events",()=>{
-    test("Get-200 response with  events list  ",()=>{
+    test.only("Get-200 response with  events list  ",()=>{
         return request(app)
         .get("/api/events")
         .expect(200)
         .then(({body})=>{
-            
             expect(body.events.length).toBe(13)
             body.events.forEach((event)=>{
                

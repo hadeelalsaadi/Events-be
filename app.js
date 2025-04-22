@@ -120,6 +120,27 @@ app.post("/api/users", registerUser )
 app.get("/api/users/:username", getUserByUsername)
 app.post("/api/event_attendees", userSignUp )
 
+app.all("/api/*",(request,response, next)=>{
+  return response.status(404).send({msg: "invalid input"})
+  
+})
+
+
+app.use((err,request, response,next)=>{
+  if(err.status && err.msg){
+      response.status(err.status).send({msg: err.msg})
+  }
+  next(err)
+})
+
+
+app.use((err,request, response,next)=>{
+  if(err.code=== "22P02" || err.code === "23503" || err.code === "23502" || err.code==='42601'){
+      response.status(400).send({msg: "Bad request"})
+  }
+  next(err)
+})
+
 
 app.use((err,request, response,next)=>{
     console.log(err.stack)
