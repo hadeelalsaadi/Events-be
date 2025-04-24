@@ -1,8 +1,8 @@
 const db= require("../db/connection.js")
 
-const postUser = ({username, email, password, role, avatar,registeredAt})=>{
+const postUser = ({username,name, email, password, role, avatar,registeredAt})=>{
     return db
-    .query('INSERT INTO users (username, email, password,user_role, avatar,registeredAt) VALUES ($1,$2,$3,$4,$5,$6) returning *;', [username, email, password,role, avatar,registeredAt])
+    .query('INSERT INTO users (username,name, email, password,user_role, avatar,registeredAt) VALUES ($1,$2,$3,$4,$5,$6,$7) returning *;', [username,name, email, password,role, avatar,registeredAt])
     .then(({ rows }) => {
         return rows[0];
       })

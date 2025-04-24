@@ -182,9 +182,10 @@ describe("DELETE  /api/events/:event_id", () => {
 })
 
 describe("POST /api/users",()=>{
-    test("POST- 201 response with the new registered user",()=>{
+    test.only("POST- 201 response with the new registered user",()=>{
        const newUser= {
         username: "Barrushi abdulhameed",
+        name: "awsalbakry",
         email: "Barruso@hotmail.com",
         password: "123456789",
         role:"member",
@@ -196,12 +197,14 @@ describe("POST /api/users",()=>{
         .send(newUser)
         .expect(201)
         .then(({body})=>{
+            console.log(body.user)
             expect(body.user).toHaveProperty("username")
             expect(body.user).toHaveProperty("email")
             expect(body.user).toHaveProperty("password")
             expect(body.user).toHaveProperty("user_role")
             expect(body.user).toHaveProperty("avatar")
             expect(body.user).toHaveProperty("registeredat")
+            expect(body.user).toHaveProperty("name")
             expect(typeof body.user.user_id).toBe("number")
 
 
@@ -211,11 +214,12 @@ describe("POST /api/users",()=>{
     })
 })
 describe("Get /api/users/:username",()=>{
-    test("GET - response with user's detials when requested by username",()=>{
+    test.only("GET - response with user's detials when requested by username",()=>{
         return request(app)
         .get("/api/users/michaelbrown")
        .expect(200)
        .then(({body})=>{
+        console.log(body.user)
         expect(body.user.user_id).toBe(4)
         expect(body.user.name).toBe("Michael Brown")
         expect(body.user.email).toBe("michael.b@example.com")
