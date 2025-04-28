@@ -176,7 +176,7 @@ describe("PATCH  /api/events/:event_id ",()=>{
 })
 
 describe("DELETE  /api/events/:event_id", () => {
-    test.only("DELETE: 204, delets event and responds with the correct status when given the delete query", () => {
+    test("DELETE: 204, delets event and responds with the correct status when given the delete query", () => {
       return request(app)
       .delete("/api/events/4")
       .expect(204);

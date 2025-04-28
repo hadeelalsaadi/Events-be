@@ -3,16 +3,12 @@ const db = require("../connection.js");
 
 const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
   return db
-    .query(`DROP TABLE IF EXISTS events CASCADE;`)
-    .then(() => {
-      return db.query(`DROP TABLE IF EXISTS genres CASCADE;`);
-    })
-    .then(() => {
-      return db.query(`DROP TABLE IF EXISTS users CASCADE;`);
-    })
-    .then(() => {
-      return db.query(`DROP TABLE IF EXISTS event_attendees CASCADE;`);
-    }).then(()=>{
+  .query(`DROP TABLE IF EXISTS event_attendees CASCADE;`)
+  .then(() => db.query(`DROP TABLE IF EXISTS events CASCADE;`))
+  .then(() => db.query(`DROP TABLE IF EXISTS users CASCADE;`))
+  .then(() => db.query(`DROP TABLE IF EXISTS genres CASCADE;`))
+    
+  .then(()=>{
         const genresTablePromise = db.query(`
             CREATE TABLE genres(
               genre_id SERIAL PRIMARY KEY,

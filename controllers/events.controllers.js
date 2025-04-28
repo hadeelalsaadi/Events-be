@@ -59,7 +59,7 @@ const removeAnEvent =(request, response, next)=>{
 
   })
   .catch((err)=>{
-    next(err)
+   return  next(err)
 })
 }
 
