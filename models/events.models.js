@@ -70,9 +70,11 @@ const deleteAnEvent =(event_id)=>{
   return db
   .query('DELETE FROM events WHERE event_id =$1;',[event_id])
   .then((data)=>{
+    console.log(data)
    
     if(data.rowCount===0)
       return Promise.reject({status: 404, msg: "Not found"})
+    return
   })
  
 }

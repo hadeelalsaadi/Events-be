@@ -24,7 +24,7 @@ describe("/api",()=>{
     })
 })
 describe("/api/events",()=>{
-    test.only("Get-200 response with  events list  ",()=>{
+    test("Get-200 response with  events list  ",()=>{
         return request(app)
         .get("/api/events")
         .expect(200)
@@ -105,6 +105,7 @@ describe("POST /api/events", () => {
         .send(newEvent)
         .expect(201)
         .then(({ body }) => {
+            console.log(body.event)
           expect(body.event).toHaveProperty('title');
           expect(body.event).toHaveProperty('description');
           expect(body.event).toHaveProperty('max_attendees');
@@ -175,14 +176,15 @@ describe("PATCH  /api/events/:event_id ",()=>{
 })
 
 describe("DELETE  /api/events/:event_id", () => {
-    test("DELETE: 204, delets event and responds with the correct status when given the delete query", () => {
+    test.only("DELETE: 204, delets event and responds with the correct status when given the delete query", () => {
       return request(app)
-      .delete("/api/events/1").expect(204);
+      .delete("/api/events/4")
+      .expect(204);
     });
 })
 
 describe("POST /api/users",()=>{
-    test.only("POST- 201 response with the new registered user",()=>{
+    test("POST- 201 response with the new registered user",()=>{
        const newUser= {
         username: "Barrushi abdulhameed",
         name: "awsalbakry",
@@ -214,7 +216,7 @@ describe("POST /api/users",()=>{
     })
 })
 describe("Get /api/users/:username",()=>{
-    test.only("GET - response with user's detials when requested by username",()=>{
+    test("GET - response with user's detials when requested by username",()=>{
         return request(app)
         .get("/api/users/michaelbrown")
        .expect(200)

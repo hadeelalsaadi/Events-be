@@ -52,8 +52,10 @@ const updateAnEvent = (request, response, next)=>{
 }
 const removeAnEvent =(request, response, next)=>{
   const { event_id } = request.params;
-  deleteAnEvent(event_id).then((data)=>{
-    return response.status(204).send(data)
+  
+  deleteAnEvent(event_id).then(()=>{
+    
+    return response.status(204).end()
 
   })
   .catch((err)=>{
