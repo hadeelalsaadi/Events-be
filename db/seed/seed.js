@@ -51,10 +51,11 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                 );`);
           })
           .then(() => {
-            return db.query(` CREATE TABLE event_attendees (
-                   attendee_id SERIAL PRIMARY KEY,
-                   event_id INT NOT NULL REFERENCES events(event_id),
-                   user_id INT NOT NULL REFERENCES users(user_id));`);
+            return db.query(`CREATE TABLE event_attendees (
+              attendee_id SERIAL PRIMARY KEY,
+              event_id INT NOT NULL REFERENCES events(event_id) ON DELETE CASCADE,
+              user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE
+            );`);
           })
           .then(() => {
             const insertGenre = format(
