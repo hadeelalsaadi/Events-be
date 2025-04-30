@@ -30,8 +30,8 @@ const postAnEvent= (request,response,next)=>{
     const newEvent = request.body
     const eventDetails1 = {
       ...newEvent,
-      start_time: new Date(newEvent['start_time']).toISOString(),
-      end_time: new Date(newEvent['end_time']).toISOString(),
+      start_time: new Date(newEvent['start_time']).getTime(),
+      end_time: new Date(newEvent['end_time']).getTime(),
   }
     console.log(eventDetails1)
     addEvent(eventDetails1)
