@@ -43,7 +43,7 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                     start_time TIMESTAMP WITHOUT TIME ZONE,
                     end_time TIMESTAMP WITHOUT TIME ZONE,
                     timezone VARCHAR,
-                    organizer_id INT  REFERENCES users(user_id)
+                    organizer_id INT  REFERENCES users(user_id) 
                 );`);
           })
           .then(() => {

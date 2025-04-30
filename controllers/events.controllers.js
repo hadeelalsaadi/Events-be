@@ -28,7 +28,13 @@ const getEventById = (request,respons,next)=>{
 
 const postAnEvent= (request,response,next)=>{
     const newEvent = request.body
-    addEvent(newEvent)
+    const eventDetails1 = {
+      ...newEvent,
+      start_time: new Date(newEvent['start_time']).toISOString(),
+      end_time: new Date(newEvent['end_time']).toISOString(),
+  }
+    console.log(eventDetails1)
+    addEvent(eventDetails1)
     .then((event) => {
       response.status(201).send({ event: event });
     })
