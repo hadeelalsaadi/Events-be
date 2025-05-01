@@ -40,8 +40,8 @@ const seed = ({ eventsData, genresData,eventattendeesData, usersData }) => {
                     genre_id INT NOT NULL REFERENCES genres(genre_id),
                     max_attendees INT, 
                     location VARCHAR ,
-                    start_time TIMESTAMP WITHOUT TIME ZONE,
-                    end_time TIMESTAMP WITHOUT TIME ZONE,
+                    start_time TIMESTAMP WITH TIME ZONE,
+                    end_time TIMESTAMP WITH TIME ZONE,
                     timezone VARCHAR,
                     organizer_id INT  REFERENCES users(user_id) 
                 );`);

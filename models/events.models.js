@@ -29,13 +29,13 @@ const fetchEventById =(event_id)=>{
 
 }
 
-const addEvent = ({title, description, url_img, genre_id, max_attendees,location,start, end, timeZone, organizer_id}) => {
+const addEvent = ({title, description, url_img, genre_id, max_attendees,location,start_time, end_time, timeZone, organizer_id}) => {
  
     return db
       .query(
-        "INSERT INTO events (title,description,url_img, genre_id ,max_attendees, location,start_time,end_time, timeZone, organizer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *;",
+        "INSERT INTO events (title,description,url_img, genre_id ,max_attendees, location,start_time,end_time, timezone, organizer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *;",
 
-        [ title, description, url_img, genre_id, max_attendees,location,start, end, timeZone, organizer_id])
+        [ title, description, url_img, genre_id, max_attendees,location,start_time, end_time, timeZone, organizer_id])
       .then(({ rows }) => {
         return rows[0];
       }).catch((err)=>{

@@ -28,13 +28,13 @@ const getEventById = (request,respons,next)=>{
 
 const postAnEvent= (request,response,next)=>{
     const newEvent = request.body
-    const eventDetails1 = {
-      ...newEvent,
-      start_time: new Date(newEvent['start_time']).getTime(),
-      end_time: new Date(newEvent['end_time']).getTime(),
-  }
-    console.log(eventDetails1)
-    addEvent(eventDetails1)
+  //   const eventDetails1 = {
+  //     ...newEvent,
+  //     start_time: new Date(newEvent['start_time']).getTime(),
+  //     end_time: new Date(newEvent['end_time']).getTime(),
+  // }
+    // console.log(eventDetails1)
+    addEvent(newEvent)
     .then((event) => {
       response.status(201).send({ event: event });
     })

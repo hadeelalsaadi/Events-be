@@ -77,7 +77,7 @@ describe("/api/events/:event_id",()=>{
 
 
 describe("POST /api/events", () => {
-    test("POST: 201 - adds a new event to the list", () => {
+    test.only("POST: 201 - adds a new event to the list", () => {
          const newEvent = { 
             title: "Neon Dreams Symposium",
             description: "Verto stella cursus. Absconditus vacuus articulus temeritas callide varietas tricesimus tardus. Arbitro versus defleo corrumpo celebrer coerceo argentum triumphus.",
@@ -92,8 +92,8 @@ describe("POST /api/events", () => {
               country: "Saint Kitts and Nevis",
               zipCode: "59301"
             },
-            start: "2025-05-02T18:00:00.000Z",
-            end: "2025-05-03T02:30:00.000Z",
+            start_time: "2025-05-02T18:00:00.000Z",
+            end_time: "2025-05-03T02:30:00.000Z",
             timeZone: "Europe/Oslo",
             organizer_id: 2
           
