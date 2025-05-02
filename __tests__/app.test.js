@@ -140,7 +140,7 @@ describe("PATCH  /api/events/:event_id ",()=>{
             },
             start_time: "2025-06-10T19:30:00.000Z",
             end_time: "2025-06-11T01:00:00.000Z",
-            timeZone: "Asia/Tokyo",
+            timezone: "Asia/Tokyo",
             organizer_id: 3
           }
         return request(app)
