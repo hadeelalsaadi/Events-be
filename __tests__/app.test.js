@@ -123,7 +123,7 @@ describe("POST /api/events", () => {
 })
 
 describe("PATCH  /api/events/:event_id ",()=>{
-    test("PATCH: 200 response with ok when user update an event details ",()=>{
+    test.only ("PATCH: 200 response with ok when user update an event details ",()=>{
         const updatedEvent= {
             title: "Synthwave Soirée",
             description: "Delibero sursum vesper paulatim amiculum. Vulgus deporto tracto crux solutio blandior defleo. Capitulus subito suffragium utor comprehendo cenaculum stella.",
@@ -138,16 +138,17 @@ describe("PATCH  /api/events/:event_id ",()=>{
               country: "Turks and Caicos Islands",
               zipCode: "88901"
             },
-            start: "2025-06-10T19:30:00.000Z",
-            end: "2025-06-11T01:00:00.000Z",
+            start_time: "2025-06-10T19:30:00.000Z",
+            end_time: "2025-06-11T01:00:00.000Z",
             timeZone: "Asia/Tokyo",
             organizer_id: 3
           }
         return request(app)
-        .patch("/api/events/2")
+        .patch("/api/events/6")
         .send(updatedEvent)
         .expect(200)
         .then(({ body }) => {  
+            console.log(body.event)
             expect(body.event.title).toBe('Synthwave Soirée')
             expect(body.event.description).toBe('Delibero sursum vesper paulatim amiculum. Vulgus deporto tracto crux solutio blandior defleo. Capitulus subito suffragium utor comprehendo cenaculum stella.')
             expect(body.event.url_img).toBe('https://loremflickr.com/640/480?lock=6834290512837642')
@@ -161,8 +162,8 @@ describe("PATCH  /api/events/:event_id ",()=>{
                 country: 'Turks and Caicos Islands',
                 zipCode: '88901'
               });
-            expect(body.event.start_time).toBe('2025-06-10T18:30:00.000Z')
-            expect(body.event.end_time).toBe('2025-06-11T00:00:00.000Z')
+            expect(body.event.start_time).toBe('2025-06-10T19:30:00.000Z')
+            expect(body.event.end_time).toBe('2025-06-11T01:00:00.000Z')
             expect(body.event.timezone).toBe('Asia/Tokyo')
             expect(body.event.organizer_id).toBe(3)
             

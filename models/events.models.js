@@ -44,14 +44,14 @@ const addEvent = ({title, description, url_img, genre_id, max_attendees,location
   };
 
 
-const patchAnEvent= (event_id, {title, description, url_img, genre_id, max_attendees,location,start,end,timeZone,organizer_id})=>{
+const patchAnEvent= (event_id, {title, description, url_img, genre_id, max_attendees,location,start_time,end_time,timeZone,organizer_id})=>{
   return db 
   .query(
     `UPDATE  public.events
-    SET title = $1, description =$2,url_img= $3, genre_id= $4, max_attendees= $5,location=$6, start_time = $7, end_time = $8, timezone = $9, organizer_id=$10
+    SET title = $1, description =$2,url_img= $3, genre_id= $4, max_attendees= $5,location=$6, start_time = $7::timestamptz, end_time = $8::timestamptz, timezone = $9, organizer_id=$10
     WHERE event_id = $11 RETURNING *;`,
       [
-        title, description, url_img, genre_id, max_attendees,location,start,end,timeZone,organizer_id, event_id
+        title, description, url_img, genre_id, max_attendees,location,start_time,end_time,timeZone,organizer_id, event_id
       ]
   ).then(({ rows }) => {
     
@@ -59,6 +59,7 @@ const patchAnEvent= (event_id, {title, description, url_img, genre_id, max_atten
       return Promise.reject({ status: 404, msg: "event not found" });
     }
     rows[0].location = JSON.parse(rows[0].location);
+    console.log("from model",rows[0])
     return rows[0];
   });
 
